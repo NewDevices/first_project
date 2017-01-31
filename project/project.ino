@@ -119,30 +119,28 @@ void setup() {
 void loop() {
 	static bool setOn1 = false;
 	static bool setOn2 = false;
+	static bool objectInRange = false;
 
 	switch (getKeyCode(analogRead(A0))) {
 		case 0: // right
 			setOn1 = false;
 			setOn2 = true;
-			printStatus(setOn1, setOn2);
 			break;
 		case 1: // up
 			setOn1 = true;
 			setOn2 = true;
-			printStatus(setOn1, setOn2);
 			break;
 		case 2: // down
 			setOn1 = false;
 			setOn2 = false;
-			printStatus(setOn1, setOn2);
 			break;
 		case 3: // left
 			setOn1 = true;
 			setOn2 = false;
-			printStatus(setOn1, setOn2);
 			break;
 	}
+	printStatus(setOn1 || objectInRange, setOn2);
 	updateServoPos();
-	rcSwitch.send(getRcCode(1, setOn1), BIT_LENGTH);
+	rcSwitch.send(getRcCode(1, setOn1 || objectInRange), BIT_LENGTH);
 	rcSwitch.send(getRcCode(2, setOn2), BIT_LENGTH);
 }
