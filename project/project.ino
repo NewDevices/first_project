@@ -1,10 +1,15 @@
 #include <RCSwitch.h>
 #include <LiquidCrystal.h>
+#include <Servo.h>
 
 /**
  * @author: Hendrik Werner // s4549775
  * @author: Timo Schrijvers // s4596331
  */
+
+#define MIN_ANGLE 30
+#define MAX_ANGLE 170
+#define SERVO_STEP 10
 
 #define BASE_CODE1 5313876
 #define BASE_CODE2 5326164
@@ -61,6 +66,28 @@ void printStatus(bool setOn1, bool setOn2) {
 	lcd.setCursor(0, 1);
 	lcd.print("Status 2: ");
 	lcd.print(setOn2 ? "on " : "off");
+}
+
+/**
+ * Update the position of the servo. Repeatedly calling this will sway the servo
+ * back and forth from MIN_ANGLE..MAX_ANGLE.
+ */
+void updateServoPos() {
+	static int servoPos = MIN_ANGLE;
+	static bool increaseServoPos = true;
+
+	if (increaseServoPos) {
+		servoPos += SERVO_STEP;
+		if (servoPos >= MAX_ANGLE) {
+			increaseServoPos = false;
+		}
+	} else {
+		servoPos -= SERVO_STEP;
+		if (servoPos <= MIN_ANGLE) {
+			increaseServoPos = true;
+		}
+	}
+	servo.write(servoPos);
 }
 
 void setup() {
