@@ -14,6 +14,7 @@
 #define MAX_ANGLE 170
 #define SERVO_STEP 10
 
+#define RC_PIN A5
 #define BASE_CODE1 5313876
 #define BASE_CODE2 5326164
 #define BIT_LENGTH 24
@@ -106,10 +107,10 @@ int getSonicDistance() {
 
 void setup() {
 	lcd.begin(16, 2);
-	pinMode(A5, OUTPUT);
+	pinMode(RC_PIN, OUTPUT);
 	pinMode(TRIGGER_PIN, OUTPUT);
 	pinMode(ECHO_PIN, INPUT);
-	rcSwitch.enableTransmit(A5);
+	rcSwitch.enableTransmit(RC_PIN);
 	rcSwitch.setProtocol(1);
 	servo.attach(A4);
 	servo.write(MIN_ANGLE);
