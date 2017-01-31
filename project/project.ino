@@ -20,6 +20,7 @@ const int keyLimits[] = {50, 190, 380, 555, 790, 1024};
 
 LiquidCrystal lcd = LiquidCrystal(8, 9, 4, 5, 6, 7);
 RCSwitch rcSwitch = RCSwitch();
+Servo servo = Servo();
 
 /**
  * Get the RC code for a given receiver corresponding to whether you want to set
@@ -95,6 +96,8 @@ void setup() {
 	pinMode(A5, OUTPUT);
 	rcSwitch.enableTransmit(A5);
 	rcSwitch.setProtocol(1);
+	servo.attach(A4);
+	servo.write(MIN_ANGLE);
 	printStatus(false, false);
 }
 
@@ -124,6 +127,7 @@ void loop() {
 			printStatus(setOn1, setOn2);
 			break;
 	}
+	updateServoPos();
 	rcSwitch.send(getRcCode(1, setOn1), BIT_LENGTH);
 	rcSwitch.send(getRcCode(2, setOn2), BIT_LENGTH);
 }
