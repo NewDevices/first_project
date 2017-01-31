@@ -1,6 +1,11 @@
 #include <RCSwitch.h>
 #include <LiquidCrystal.h>
 
+/**
+ * @author: Hendrik Werner // s4549775
+ * @author: Timo Schrijvers // s4596331
+ */
+
 #define BASE_CODE1 5313876
 #define BASE_CODE2 5326164
 #define BIT_LENGTH 24
