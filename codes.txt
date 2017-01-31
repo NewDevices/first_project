@@ -4,3 +4,12 @@ Band 3
 1 out 5313876
 2 on 5326165
 2 out 5326164
+
+Keys
+
+5 niks 1023
+4 select 742
+3 links 505
+2 beneden 328
+1 boven 143
+0 rechts 0
