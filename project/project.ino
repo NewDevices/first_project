@@ -46,6 +46,18 @@ int getKeyCode(int value) {
 	return -1;
 }
 
+/**
+ * Print the status of the switches to the lcd.
+ */
+void printStatus(bool setOn1, bool setOn2) {
+	lcd.setCursor(0, 0);
+	lcd.print("Status 1: ");
+	lcd.print(setOn1 ? "on " : "off");
+	lcd.setCursor(0, 1);
+	lcd.print("Status 2: ");
+	lcd.print(setOn2 ? "on " : "off");
+}
+
 void setup() {
 	lcd.begin(16, 2);
 	pinMode(A5, OUTPUT);
