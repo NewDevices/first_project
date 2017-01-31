@@ -22,6 +22,10 @@ long getRcCode(int receiver, bool setOn) {
 }
 
 void setup() {
+	lcd.begin(16, 2);
+	pinMode(A5, OUTPUT);
+	rcSwitch.enableTransmit(A5);
+	rcSwitch.setProtocol(1);
 }
 
 void loop() {
