@@ -7,6 +7,9 @@
  * @author: Timo Schrijvers // s4596331
  */
 
+#define TRIGGER_PIN A2
+#define ECHO_PIN A1
+
 #define MIN_ANGLE 30
 #define MAX_ANGLE 170
 #define SERVO_STEP 10
@@ -91,9 +94,21 @@ void updateServoPos() {
 	servo.write(servoPos);
 }
 
+/**
+ * Retrieve the distance measured by the sonic sensor in cm.
+ */
+int getSonicDistance() {
+	digitalWrite(TRIGGER_PIN, HIGH);
+	delayMicroseconds(10);
+	digitalWrite(TRIGGER_PIN, LOW);
+	return (pulseIn(ECHO_PIN, HIGH) / 2) / 29;
+}
+
 void setup() {
 	lcd.begin(16, 2);
 	pinMode(A5, OUTPUT);
+	pinMode(TRIGGER_PIN, OUTPUT);
+	pinMode(ECHO_PIN, INPUT);
 	rcSwitch.enableTransmit(A5);
 	rcSwitch.setProtocol(1);
 	servo.attach(A4);
