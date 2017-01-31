@@ -63,6 +63,7 @@ void setup() {
 	pinMode(A5, OUTPUT);
 	rcSwitch.enableTransmit(A5);
 	rcSwitch.setProtocol(1);
+	printStatus(false, false);
 }
 
 void loop() {
