@@ -7,6 +7,8 @@
  * @author: Timo Schrijvers // s4596331
  */
 
+#define BUTTONS_PIN A0
+
 #define TRIGGER_PIN A2
 #define ECHO_PIN A1
 #define OBJECT_DIST 100 // in cm
@@ -132,7 +134,7 @@ void loop() {
 	static bool objectInRange = false;
 	static long lastObjectDetected = 0;
 
-	switch (getKeyCode(analogRead(A0))) {
+	switch (getKeyCode(analogRead(BUTTONS_PIN))) {
 		case 0: // right
 			setOn1 = false;
 			setOn2 = true;
