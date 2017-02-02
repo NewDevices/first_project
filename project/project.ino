@@ -9,6 +9,8 @@
 
 #define TRIGGER_PIN A2
 #define ECHO_PIN A1
+#define OBJECT_DIST 100 // in cm
+#define OBJECT_TIME 60 * 1000 // 60 seconds
 
 #define MIN_ANGLE 30
 #define MAX_ANGLE 170
@@ -121,6 +123,7 @@ void loop() {
 	static bool setOn1 = false;
 	static bool setOn2 = false;
 	static bool objectInRange = false;
+	static long lastObjectDetected = 0;
 
 	switch (getKeyCode(analogRead(A0))) {
 		case 0: // right
@@ -139,6 +142,14 @@ void loop() {
 			setOn1 = true;
 			setOn2 = false;
 			break;
+	}
+	if (getSonicDistance() < OBJECT_DIST) {
+		lastObjectDetected = millis();
+	}
+	if (millis() - lastObjectDetected < OBJECT_TIME) {
+		objectInRange = true;
+	} else {
+		objectInRange = false;
 	}
 	printStatus(setOn1 || objectInRange, setOn2);
 	updateServoPos();
