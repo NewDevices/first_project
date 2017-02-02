@@ -12,6 +12,7 @@
 #define OBJECT_DIST 100 // in cm
 #define OBJECT_TIME 60 * 1000 // 60 seconds
 
+#define SERVO_PIN A4
 #define MIN_ANGLE 30
 #define MAX_ANGLE 170
 #define SERVO_STEP 10
@@ -114,7 +115,7 @@ void setup() {
 	pinMode(ECHO_PIN, INPUT);
 	rcSwitch.enableTransmit(RC_PIN);
 	rcSwitch.setProtocol(1);
-	servo.attach(A4);
+	servo.attach(SERVO_PIN);
 	servo.write(MIN_ANGLE);
 	printStatus(false, false);
 }
