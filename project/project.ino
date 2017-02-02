@@ -135,6 +135,19 @@ void updateSwitchStatuses(bool *setOn1, bool *setOn2) {
 }
 
 /**
+ * Check whether there has been an object within OBJECT_DIST cm in the last
+ * OBJECT_TIME ms.
+ */
+bool objectInRange() {
+	static long lastObjectDetected = 0;
+
+	if (getSonicDistance() < OBJECT_DIST) {
+		lastObjectDetected = millis();
+	}
+	return millis() - lastObjectDetected < OBJECT_TIME;
+}
+
+/**
  * This is called once after (re)starting the Arduino.
  */
 void setup() {
@@ -155,18 +168,9 @@ void setup() {
 void loop() {
 	static bool setOn1 = false;
 	static bool setOn2 = false;
-	static bool objectInRange = false;
-	static long lastObjectDetected = 0;
 
 	updateSwitchStatuses(&setOn1, &setOn2);
-	if (getSonicDistance() < OBJECT_DIST) {
-		lastObjectDetected = millis();
-	}
-	if (millis() - lastObjectDetected < OBJECT_TIME) {
-		objectInRange = true;
-	} else {
-		objectInRange = false;
-	}
+	bool objectInRange = objectInRange();
 	printStatus(setOn1 || objectInRange, setOn2);
 	updateServoPos();
 	rcSwitch.send(getRcCode(1, setOn1 || objectInRange), BIT_LENGTH);
