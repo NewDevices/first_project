@@ -108,6 +108,9 @@ int getSonicDistance() {
 	return (pulseIn(ECHO_PIN, HIGH) / 2) / 29;
 }
 
+/**
+ * This is called once after (re)starting the Arduino.
+ */
 void setup() {
 	lcd.begin(16, 2);
 	pinMode(RC_PIN, OUTPUT);
@@ -120,6 +123,9 @@ void setup() {
 	printStatus(false, false);
 }
 
+/**
+ * This is called in a loop once setup() has executd.
+ */
 void loop() {
 	static bool setOn1 = false;
 	static bool setOn2 = false;
