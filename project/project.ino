@@ -111,6 +111,30 @@ int getSonicDistance() {
 }
 
 /**
+ * Update the statuses of the switches according to the buttons pressed.
+ */
+void updateSwitchStatuses(bool *setOn1, bool *setOn2) {
+	switch (getKeyCode(analogRead(BUTTONS_PIN))) {
+		case 0: // right
+			*setOn1 = false;
+			*setOn2 = true;
+			break;
+		case 1: // up
+			*setOn1 = true;
+			*setOn2 = true;
+			break;
+		case 2: // down
+			*setOn1 = false;
+			*setOn2 = false;
+			break;
+		case 3: // left
+			*setOn1 = true;
+			*setOn2 = false;
+			break;
+	}
+}
+
+/**
  * This is called once after (re)starting the Arduino.
  */
 void setup() {
@@ -134,24 +158,7 @@ void loop() {
 	static bool objectInRange = false;
 	static long lastObjectDetected = 0;
 
-	switch (getKeyCode(analogRead(BUTTONS_PIN))) {
-		case 0: // right
-			setOn1 = false;
-			setOn2 = true;
-			break;
-		case 1: // up
-			setOn1 = true;
-			setOn2 = true;
-			break;
-		case 2: // down
-			setOn1 = false;
-			setOn2 = false;
-			break;
-		case 3: // left
-			setOn1 = true;
-			setOn2 = false;
-			break;
-	}
+	updateSwitchStatuses(&setOn1, &setOn2);
 	if (getSonicDistance() < OBJECT_DIST) {
 		lastObjectDetected = millis();
 	}
