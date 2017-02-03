@@ -13,6 +13,24 @@
  *   - Tower Pro Micro Servo SG90
  *   - 433MHz Radio Śender
  *   - Sonic Distance Sensor
+ *
+ * Setup:
+ *   - Radio Switches were set up to use address code III on channel 1 and 2.
+ *   - LCD Shield was stacked onto the Arduino.
+ *   - The Servo, Radio Sender, and Sonic Sensor were all connected to Ground
+ *     and 5V on the LCD Shield.
+ *
+ *
+ * Analog Pin Layout:
+ *
+ * Pin | Function             | Mode
+ * ----+----------------------+--------
+ *  A0 | LCD Shield Buttons   |
+ *  A1 | Sonic Sensor Echo    | INPUT
+ *  A2 | Sonic Sensor Trigger | OUTPUT
+ *  A3 |                      |
+ *  A4 | Servo                |
+ *  A5 | Radio Sender         | OUTPUT
  */
 
 #define BUTTONS_PIN A0
