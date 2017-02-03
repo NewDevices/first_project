@@ -5,6 +5,14 @@
 /**
  * @author: Hendrik Werner // s4549775
  * @author: Timo Schrijvers // s4596331
+ *
+ * Components we used:
+ *   - Renkforce Radio Controlled Switch Set 433MHz
+ *   - Arduino Duemilanove ATmega328
+ *   - LCD1602 Key Shield 1.0
+ *   - Tower Pro Micro Servo SG90
+ *   - 433MHz Radio Śender
+ *   - Sonic Distance Sensor
  */
 
 #define BUTTONS_PIN A0
