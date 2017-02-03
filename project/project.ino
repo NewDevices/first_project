@@ -170,9 +170,9 @@ void loop() {
 	static bool setOn2 = false;
 
 	updateSwitchStatuses(&setOn1, &setOn2);
-	bool objectInRange = objectInRange();
-	printStatus(setOn1 || objectInRange, setOn2);
+	bool turnOn1 = setOn1 || objectInRange();
+	printStatus(turnOn1, setOn2);
 	updateServoPos();
-	rcSwitch.send(getRcCode(1, setOn1 || objectInRange), BIT_LENGTH);
+	rcSwitch.send(getRcCode(1, turnOn1), BIT_LENGTH);
 	rcSwitch.send(getRcCode(2, setOn2), BIT_LENGTH);
 }
