@@ -189,7 +189,7 @@ void setup() {
 }
 
 /**
- * This is called in a loop once setup() has executd.
+ * This is called in a loop once setup() has executed.
  */
 void loop() {
 	static bool setOn1 = false;
